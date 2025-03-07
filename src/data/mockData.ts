@@ -147,80 +147,62 @@ export const reports = [
   {
     id: '1',
     title: 'Monthly Performance Report - July 2023',
-    description: 'Comprehensive analysis of trading performance for July 2023',
+    type: 'monthly',
     date: '2023-08-01',
-    metrics: {
-      totalTrades: 42,
-      winRate: 68,
-      profit: 3250,
-      drawdown: 5.2
-    },
-    type: 'monthly'
+    totalTrades: 42,
+    winRate: 68,
+    profitLoss: 3250,
+    topPerformers: ['1', '2', '4']
   },
   {
     id: '2',
     title: 'Strategy Analysis - Breakout Trades',
-    description: 'Performance review of breakout trading strategy across all pairs',
+    type: 'weekly',
     date: '2023-07-15',
-    metrics: {
-      totalTrades: 28,
-      winRate: 71,
-      profit: 1850,
-      drawdown: 3.8
-    },
-    type: 'strategy'
+    totalTrades: 28,
+    winRate: 71,
+    profitLoss: 1850,
+    topPerformers: ['1', '4']
   },
   {
     id: '3',
     title: 'Quarterly Review - Q2 2023',
-    description: 'Quarterly performance analysis and strategy adjustments',
+    type: 'monthly',
     date: '2023-07-02',
-    metrics: {
-      totalTrades: 115,
-      winRate: 62,
-      profit: 8750,
-      drawdown: 7.5
-    },
-    type: 'quarterly'
+    totalTrades: 115,
+    winRate: 62,
+    profitLoss: 8750,
+    topPerformers: ['1', '2', '3', '5']
   },
   {
     id: '4',
     title: 'Pair Analysis - EUR/USD',
-    description: 'Detailed performance metrics for EUR/USD trades',
+    type: 'daily',
     date: '2023-06-28',
-    metrics: {
-      totalTrades: 35,
-      winRate: 65,
-      profit: 2200,
-      drawdown: 4.1
-    },
-    type: 'pair'
+    totalTrades: 35,
+    winRate: 65,
+    profitLoss: 2200,
+    topPerformers: ['1', '3']
   },
   {
     id: '5',
     title: 'Risk Management Audit',
-    description: 'Analysis of position sizing and risk management effectiveness',
+    type: 'weekly',
     date: '2023-06-15',
-    metrics: {
-      totalTrades: 87,
-      winRate: 59,
-      profit: 5400,
-      drawdown: 6.2
-    },
-    type: 'risk'
+    totalTrades: 87,
+    winRate: 59,
+    profitLoss: 5400,
+    topPerformers: ['2', '4', '5']
   },
   {
     id: '6',
     title: 'Weekly Performance - Week 27',
-    description: 'Trading performance summary for week 27 of 2023',
+    type: 'weekly',
     date: '2023-07-09',
-    metrics: {
-      totalTrades: 12,
-      winRate: 75,
-      profit: 950,
-      drawdown: 2.8
-    },
-    type: 'weekly'
+    totalTrades: 12,
+    winRate: 75,
+    profitLoss: 950,
+    topPerformers: ['1', '2']
   }
 ];
 

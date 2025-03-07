@@ -2,12 +2,19 @@ export interface Trader {
   id: string;
   name: string;
   email: string;
-  performance: number;
-  trades: number;
-  winRate: number;
-  profitLoss: number;
-  status: 'active' | 'inactive' | 'suspended';
+  performance: number | {
+    monthlyProfit: number;
+    winRate: number;
+    totalTrades: number;
+    averageRR: number;
+  };
+  trades?: number;
+  winRate?: number;
+  profitLoss?: number;
+  status: 'active' | 'inactive' | 'suspended' | 'on leave';
   avatar: string;
+  role?: string;
+  specialties?: string[];
 }
 
 export interface ChecklistItem {

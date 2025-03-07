@@ -22,6 +22,11 @@ const ReportCard: React.FC<ReportCardProps> = ({ report }) => {
     }
   };
 
+  // Ensure profitLoss is a number before calling toLocaleString
+  const formattedProfitLoss = typeof report.profitLoss === 'number' 
+    ? report.profitLoss.toLocaleString() 
+    : '0';
+
   return (
     <GlassCard>
       <div className="flex justify-between items-start">
@@ -42,7 +47,7 @@ const ReportCard: React.FC<ReportCardProps> = ({ report }) => {
           <div className="flex items-center justify-between">
             <p className="text-sm font-medium text-gray-500">Total Trades</p>
           </div>
-          <p className="mt-1 text-xl font-semibold text-gray-900">{report.totalTrades}</p>
+          <p className="mt-1 text-xl font-semibold text-gray-900">{report.totalTrades || 0}</p>
         </div>
         
         <div className="bg-blue-50/50 rounded-lg p-3">
@@ -50,16 +55,16 @@ const ReportCard: React.FC<ReportCardProps> = ({ report }) => {
             <p className="text-sm font-medium text-gray-500">Win Rate</p>
             <BarChart2 size={16} className="text-blue-500" />
           </div>
-          <p className="mt-1 text-xl font-semibold text-gray-900">{report.winRate}%</p>
+          <p className="mt-1 text-xl font-semibold text-gray-900">{report.winRate || 0}%</p>
         </div>
         
         <div className="bg-blue-50/50 rounded-lg p-3">
           <div className="flex items-center justify-between">
             <p className="text-sm font-medium text-gray-500">P/L</p>
-            <TrendingUp size={16} className={report.profitLoss >= 0 ? 'text-green-500' : 'text-red-500'} />
+            <TrendingUp size={16} className={typeof report.profitLoss === 'number' && report.profitLoss >= 0 ? 'text-green-500' : 'text-red-500'} />
           </div>
-          <p className={`mt-1 text-xl font-semibold ${report.profitLoss >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-            ${report.profitLoss.toLocaleString()}
+          <p className={`mt-1 text-xl font-semibold ${typeof report.profitLoss === 'number' && report.profitLoss >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+            ${formattedProfitLoss}
           </p>
         </div>
       </div>
@@ -67,7 +72,7 @@ const ReportCard: React.FC<ReportCardProps> = ({ report }) => {
       <div className="mt-6">
         <h4 className="text-sm font-medium text-gray-700 mb-2">Top Performers</h4>
         <div className="flex -space-x-2">
-          {report.topPerformers.map((traderId, index) => (
+          {report.topPerformers && report.topPerformers.map((traderId, index) => (
             <img
               key={traderId}
               className="w-8 h-8 rounded-full border-2 border-white"

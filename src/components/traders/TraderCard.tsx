@@ -23,6 +23,13 @@ const TraderCard: React.FC<TraderCardProps> = ({ trader }) => {
     }
   };
 
+  // Extract performance values from the trader object
+  const performance = typeof trader.performance === 'object' ? trader.performance : { monthlyProfit: 0, winRate: 0, totalTrades: 0, averageRR: 0 };
+  const performanceValue = typeof trader.performance === 'number' ? trader.performance : 0;
+  const winRate = typeof trader.winRate === 'number' ? trader.winRate : (performance.winRate || 0);
+  const trades = typeof trader.trades === 'number' ? trader.trades : (performance.totalTrades || 0);
+  const profitLoss = typeof trader.profitLoss === 'number' ? trader.profitLoss : (performance.monthlyProfit || 0);
+
   return (
     <GlassCard className="h-full">
       <div className="flex flex-col h-full">
@@ -45,39 +52,39 @@ const TraderCard: React.FC<TraderCardProps> = ({ trader }) => {
               <p className="text-sm font-medium text-gray-500">Performance</p>
               <BarChart2 size={16} className="text-blue-500" />
             </div>
-            <p className="mt-1 text-xl font-semibold text-gray-900">{trader.performance}%</p>
+            <p className="mt-1 text-xl font-semibold text-gray-900">{performanceValue}%</p>
           </div>
           
           <div className="bg-blue-50/50 rounded-lg p-3">
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-gray-500">Win Rate</p>
-              {trader.winRate >= 50 ? (
+              {winRate >= 50 ? (
                 <TrendingUp size={16} className="text-green-500" />
               ) : (
                 <TrendingDown size={16} className="text-red-500" />
               )}
             </div>
-            <p className="mt-1 text-xl font-semibold text-gray-900">{trader.winRate}%</p>
+            <p className="mt-1 text-xl font-semibold text-gray-900">{winRate}%</p>
           </div>
           
           <div className="bg-blue-50/50 rounded-lg p-3">
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-gray-500">Trades</p>
             </div>
-            <p className="mt-1 text-xl font-semibold text-gray-900">{trader.trades}</p>
+            <p className="mt-1 text-xl font-semibold text-gray-900">{trades}</p>
           </div>
           
           <div className="bg-blue-50/50 rounded-lg p-3">
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-gray-500">P/L</p>
-              {trader.profitLoss >= 0 ? (
+              {profitLoss >= 0 ? (
                 <TrendingUp size={16} className="text-green-500" />
               ) : (
                 <TrendingDown size={16} className="text-red-500" />
               )}
             </div>
-            <p className={`mt-1 text-xl font-semibold ${trader.profitLoss >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-              ${trader.profitLoss.toLocaleString()}
+            <p className={`mt-1 text-xl font-semibold ${profitLoss >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+              ${profitLoss.toLocaleString()}
             </p>
           </div>
         </div>
