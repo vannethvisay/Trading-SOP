@@ -34,29 +34,29 @@ const ActiveTraders: React.FC = () => {
   ];
 
   return (
-    <GlassCard>
-      <div className="flex justify-between items-center mb-4">
+    <GlassCard className="flex flex-col h-full">
+      <div className="flex justify-between items-center mb-3">
         <h2 className="text-lg font-semibold text-gray-800">Active Traders</h2>
         <span className="status-badge active">2 Online</span>
       </div>
       
-      <div className="space-y-4">
+      <div className="space-y-3 flex-1 overflow-y-auto">
         {traders.map(trader => (
-          <div key={trader.id} className="p-3 bg-gray-50 rounded-lg">
-            <div className="flex justify-between items-center mb-2">
+          <div key={trader.id} className="p-2 bg-gray-50 rounded-lg">
+            <div className="flex justify-between items-center mb-1.5">
               <div className="flex items-center">
-                <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                  <span className="text-blue-600 font-medium">{trader.name.charAt(0)}</span>
+                <div className="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center mr-2">
+                  <span className="text-blue-600 font-medium text-xs">{trader.name.charAt(0)}</span>
                 </div>
                 <div>
-                  <p className="font-medium text-gray-800">{trader.name}</p>
+                  <p className="font-medium text-gray-800 text-sm">{trader.name}</p>
                   <p className="text-xs text-gray-500">Trading: {trader.trading}</p>
                 </div>
               </div>
-              <span className="status-badge active">Active</span>
+              <span className="status-badge active text-xs">Active</span>
             </div>
             
-            <div className="flex justify-between text-sm mt-3">
+            <div className="flex justify-between text-xs mt-2">
               <div>
                 <p className="text-gray-500">Positions:</p>
                 <p className="font-medium text-gray-800">{trader.positions}</p>
@@ -68,7 +68,7 @@ const ActiveTraders: React.FC = () => {
                 </p>
               </div>
               <div>
-                <button className="text-xs text-blue-600 bg-blue-50 px-3 py-1 rounded-full">View Details</button>
+                <button className="text-xs text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">View</button>
               </div>
             </div>
           </div>

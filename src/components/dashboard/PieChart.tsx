@@ -1,32 +1,21 @@
 import React from 'react';
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
-  ChartData,
-  ChartOptions
-} from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import GlassCard from '../ui/GlassCard';
 
-ChartJS.register(
-  ArcElement,
-  Tooltip,
-  Legend
-);
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 interface PieChartProps {
-  data: ChartData<'doughnut'>;
+  data: any;
   title: string;
   centerText?: {
     title: string;
-    value: string | number;
+    value: number;
   };
 }
 
-const PieChart: React.FC<PieChartProps> = ({ data, title, centerText }) => {
-  const options: ChartOptions<'doughnut'> = {
+const PieChartComponent: React.FC<PieChartProps> = ({ data, title, centerText }) => {
+  const options = {
     responsive: true,
     maintainAspectRatio: false,
     cutout: '70%',
@@ -34,42 +23,32 @@ const PieChart: React.FC<PieChartProps> = ({ data, title, centerText }) => {
       legend: {
         position: 'bottom' as const,
         labels: {
+          boxWidth: 10,
           usePointStyle: true,
-          boxWidth: 6,
-          padding: 20,
-          font: {
-            family: "'Inter', sans-serif",
-            size: 12
-          }
+          pointStyle: 'circle'
         }
       },
-      title: {
-        display: false
-      },
       tooltip: {
-        backgroundColor: 'rgba(255, 255, 255, 0.95)',
-        titleColor: '#1e293b',
-        bodyColor: '#334155',
-        borderColor: 'rgba(148, 163, 184, 0.2)',
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        titleColor: '#1f2937',
+        bodyColor: '#1f2937',
+        borderColor: '#e5e7eb',
         borderWidth: 1,
-        padding: 12,
-        cornerRadius: 8,
-        boxPadding: 6
+        padding: 10,
+        boxPadding: 5,
+        usePointStyle: true
       }
     }
   };
 
   return (
-    <GlassCard className="h-80">
+    <GlassCard className="h-full">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold text-gray-800">{title}</h2>
-        <div className="flex space-x-2">
-          <button className="tab-button active">Today</button>
-          <button className="tab-button">Week</button>
-        </div>
+        <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
       </div>
-      <div className="h-64 relative">
+      <div className="flex-1 relative" style={{ minHeight: '250px' }}>
         <Doughnut options={options} data={data} />
+        
         {centerText && (
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
             <p className="text-sm text-gray-500">{centerText.title}</p>
@@ -81,4 +60,4 @@ const PieChart: React.FC<PieChartProps> = ({ data, title, centerText }) => {
   );
 };
 
-export default PieChart;
+export default PieChartComponent;

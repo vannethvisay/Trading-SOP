@@ -82,7 +82,7 @@ const TradingNotifications: React.FC = () => {
   };
 
   return (
-    <GlassCard>
+    <GlassCard className="flex flex-col h-full">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold text-gray-800">Trading Notifications</h2>
         <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
@@ -90,7 +90,7 @@ const TradingNotifications: React.FC = () => {
         </span>
       </div>
       
-      <div className="space-y-3">
+      <div className="space-y-3 flex-1 overflow-y-auto">
         {notifications.map(notification => (
           <div 
             key={notification.id} 

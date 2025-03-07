@@ -9,7 +9,6 @@ import ActiveTraders from '../components/dashboard/ActiveTraders';
 import RecentAlerts from '../components/dashboard/RecentAlerts';
 import MarketSentiment from '../components/dashboard/MarketSentiment';
 import TradingHeatmap from '../components/dashboard/TradingHeatmap';
-import TradingNotifications from '../components/dashboard/TradingNotifications';
 import QuickActions from '../components/dashboard/QuickActions';
 import TradingSummary from '../components/dashboard/TradingSummary';
 import { 
@@ -45,6 +44,7 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
       
+      {/* Stat Cards - Equal height and consistent spacing */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
         <StatCard
           title="Daily P&L"
@@ -76,6 +76,7 @@ const Dashboard: React.FC = () => {
         />
       </div>
       
+      {/* Chart Cards - Equal height with flex-1 */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <div className="lg:col-span-1">
           <PerformanceChart data={performanceData} title="Team Performance" />
@@ -92,6 +93,7 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
       
+      {/* Summary Cards - Equal height with flex-1 */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <div className="lg:col-span-1">
           <TradingSummary />
@@ -104,19 +106,23 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
       
+      {/* Bottom Cards - Equal height with flex-1 */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-1">
           <RiskMetrics />
         </div>
         <div className="lg:col-span-1">
           <div className="grid grid-cols-1 gap-6">
-            <QuickActions />
-            <ActiveTraders />
+            <div className="h-[250px]">
+              <QuickActions />
+            </div>
+            <div className="h-[250px]">
+              <ActiveTraders />
+            </div>
           </div>
         </div>
         <div className="lg:col-span-1">
-          <div className="grid grid-cols-1 gap-6">
-            <TradingNotifications />
+          <div className="h-[250px]">
             <RecentAlerts />
           </div>
         </div>

@@ -1,113 +1,75 @@
 import React from 'react';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-  ChartData,
-  ChartOptions
-} from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import GlassCard from '../ui/GlassCard';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 interface BarChartProps {
-  data: ChartData<'bar'>;
+  data: any;
   title: string;
 }
 
-const BarChart: React.FC<BarChartProps> = ({ data, title }) => {
-  const options: ChartOptions<'bar'> = {
+const BarChartComponent: React.FC<BarChartProps> = ({ data, title }) => {
+  const options = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: 'top' as const,
-        align: 'start',
-        labels: {
-          usePointStyle: true,
-          boxWidth: 6,
-          font: {
-            family: "'Inter', sans-serif",
-            size: 12
-          }
-        }
-      },
-      title: {
         display: false
       },
       tooltip: {
-        backgroundColor: 'rgba(255, 255, 255, 0.95)',
-        titleColor: '#1e293b',
-        bodyColor: '#334155',
-        borderColor: 'rgba(148, 163, 184, 0.2)',
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        titleColor: '#1f2937',
+        bodyColor: '#1f2937',
+        borderColor: '#e5e7eb',
         borderWidth: 1,
-        padding: 12,
-        cornerRadius: 8,
-        boxPadding: 6
+        padding: 10,
+        boxPadding: 5,
+        usePointStyle: true,
+        callbacks: {
+          label: function(context: any) {
+            let label = context.dataset.label || '';
+            if (label) {
+              label += ': ';
+            }
+            if (context.parsed.y !== null) {
+              label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+            }
+            return label;
+          }
+        }
       }
     },
     scales: {
-      y: {
-        grid: {
-          color: 'rgba(148, 163, 184, 0.1)',
-          drawBorder: false,
-        },
-        ticks: {
-          font: {
-            family: "'Inter', sans-serif",
-            size: 11
-          },
-          color: '#64748b'
-        }
-      },
       x: {
         grid: {
-          display: false,
-          drawBorder: false
-        },
-        ticks: {
-          font: {
-            family: "'Inter', sans-serif",
-            size: 11
-          },
-          color: '#64748b'
+          display: false
         }
       },
-    },
-    elements: {
-      bar: {
-        borderRadius: 4,
-      },
-    },
+      y: {
+        grid: {
+          color: 'rgba(0, 0, 0, 0.05)'
+        },
+        ticks: {
+          callback: function(value: any) {
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumSignificantDigits: 3 }).format(value);
+          }
+        }
+      }
+    }
   };
 
   return (
-    <GlassCard className="h-80">
+    <GlassCard className="h-full">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold text-gray-800">{title}</h2>
-        <div className="flex space-x-2">
-          <button className="tab-button active">Day</button>
-          <button className="tab-button">Week</button>
-          <button className="tab-button">Month</button>
-        </div>
+        <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
       </div>
-      <div className="h-64">
+      <div className="flex-1" style={{ minHeight: '250px' }}>
         <Bar options={options} data={data} />
       </div>
     </GlassCard>
   );
 };
 
-export default BarChart;
+export default BarChartComponent;

@@ -7,7 +7,7 @@ interface GlassCardProps {
 
 const GlassCard: React.FC<GlassCardProps> = ({ children, className = '' }) => {
   return (
-    <div className={`glass p-5 hover-lift ${className}`}>
+    <div className={`glass p-5 hover-lift h-full flex flex-col ${className}`}>
       {children}
     </div>
   );
