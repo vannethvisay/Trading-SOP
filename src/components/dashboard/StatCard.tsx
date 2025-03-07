@@ -8,33 +8,41 @@ interface StatCardProps {
   trend?: {
     value: number;
     isPositive: boolean;
+    text?: string;
   };
   className?: string;
+  iconColor?: string;
 }
 
-const StatCard: React.FC<StatCardProps> = ({ title, value, icon, trend, className = '' }) => {
+const StatCard: React.FC<StatCardProps> = ({ 
+  title, 
+  value, 
+  icon, 
+  trend, 
+  className = '',
+  iconColor = 'bg-blue-100'
+}) => {
   return (
     <GlassCard className={`${className}`}>
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm font-medium text-gray-500">{title}</p>
-          <p className="mt-1 text-2xl font-semibold text-gray-900">{value}</p>
+          <p className="mt-1 text-2xl font-bold text-gray-800">{value}</p>
           
           {trend && (
-            <div className="mt-2 flex items-center">
+            <div className="mt-2">
               <span
                 className={`text-xs font-medium ${
-                  trend.isPositive ? 'text-green-600' : 'text-red-600'
+                  trend.isPositive ? 'text-emerald-600' : 'text-rose-500'
                 }`}
               >
-                {trend.isPositive ? '+' : ''}{trend.value}%
+                {trend.isPositive ? '+' : ''}{trend.value}% {trend.text || 'from yesterday'}
               </span>
-              <span className="ml-1 text-xs text-gray-500">vs last period</span>
             </div>
           )}
         </div>
         
-        <div className="p-3 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 rounded-lg">
+        <div className={`p-3 rounded-full ${iconColor}`}>
           {icon}
         </div>
       </div>

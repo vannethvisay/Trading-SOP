@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
-import Sidebar from './Sidebar';
 import Header from './Header';
+import Sidebar from './Sidebar';
 
 interface LayoutProps {
   children: ReactNode;
@@ -8,11 +8,11 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="flex h-screen bg-gradient-to-br from-gray-50 to-blue-50">
-      <Sidebar />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <Header />
-        <main className="flex-1 overflow-y-auto p-6">
+    <div className="min-h-screen bg-f5f7fa">
+      <Header />
+      <div className="flex">
+        <Sidebar />
+        <main className="flex-1 p-6 md:p-8 max-w-7xl mx-auto">
           {children}
         </main>
       </div>
