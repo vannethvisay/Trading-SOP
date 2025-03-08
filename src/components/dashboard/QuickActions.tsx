@@ -1,61 +1,50 @@
 import React from 'react';
 import GlassCard from '../ui/GlassCard';
+import { Plus, BarChart2, FileText, Bell } from 'lucide-react';
 
 const QuickActions: React.FC = () => {
   const actions = [
-    {
-      title: 'New Trade',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-        </svg>
-      ),
-      color: 'from-blue-500 to-blue-600'
+    { 
+      icon: <Plus size={18} className="text-white" />, 
+      label: 'New Trade', 
+      color: 'bg-indigo-500 hover:bg-indigo-600',
+      onClick: () => console.log('New Trade clicked')
     },
-    {
-      title: 'Risk Analysis',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-        </svg>
-      ),
-      color: 'from-purple-500 to-purple-600'
+    { 
+      icon: <BarChart2 size={18} className="text-white" />, 
+      label: 'Analytics', 
+      color: 'bg-blue-500 hover:bg-blue-600',
+      onClick: () => console.log('Analytics clicked')
     },
-    {
-      title: 'Market News',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-        </svg>
-      ),
-      color: 'from-amber-500 to-amber-600'
+    { 
+      icon: <FileText size={18} className="text-white" />, 
+      label: 'Reports', 
+      color: 'bg-emerald-500 hover:bg-emerald-600',
+      onClick: () => console.log('Reports clicked')
     },
-    {
-      title: 'Settings',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-        </svg>
-      ),
-      color: 'from-gray-500 to-gray-600'
+    { 
+      icon: <Bell size={18} className="text-white" />, 
+      label: 'Alerts', 
+      color: 'bg-amber-500 hover:bg-amber-600',
+      onClick: () => console.log('Alerts clicked')
     }
   ];
 
   return (
-    <GlassCard className="flex flex-col h-full">
+    <GlassCard className="h-full">
       <h2 className="text-lg font-semibold text-gray-800 mb-4">Quick Actions</h2>
       
-      <div className="grid grid-cols-2 gap-3 flex-1">
+      <div className="grid grid-cols-2 gap-3">
         {actions.map((action, index) => (
           <button
             key={index}
-            className={`flex flex-col items-center justify-center p-3 rounded-lg bg-gradient-to-r ${action.color} text-white transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
+            className={`${action.color} rounded-lg p-3 transition-colors duration-200 flex flex-col items-center justify-center`}
+            onClick={action.onClick}
           >
-            <div className="p-1.5 rounded-full bg-white/20 mb-2">
+            <div className="w-8 h-8 rounded-full bg-white bg-opacity-20 flex items-center justify-center mb-2">
               {action.icon}
             </div>
-            <span className="font-medium text-xs sm:text-sm">{action.title}</span>
+            <span className="text-sm font-medium text-white">{action.label}</span>
           </button>
         ))}
       </div>

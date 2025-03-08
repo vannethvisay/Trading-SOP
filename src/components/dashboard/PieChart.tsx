@@ -12,9 +12,10 @@ interface PieChartProps {
     title: string;
     value: number;
   };
+  isLoading?: boolean;
 }
 
-const PieChartComponent: React.FC<PieChartProps> = ({ data, title, centerText }) => {
+const PieChart: React.FC<PieChartProps> = ({ data, title, centerText, isLoading = false }) => {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
@@ -36,7 +37,12 @@ const PieChartComponent: React.FC<PieChartProps> = ({ data, title, centerText })
         borderWidth: 1,
         padding: 10,
         boxPadding: 5,
-        usePointStyle: true
+      }
+    },
+    onClick: (event: any, elements: any) => {
+      if (elements.length > 0) {
+        const index = elements[0].index;
+        console.log('Clicked on:', data.labels[index]);
       }
     }
   };
@@ -47,17 +53,25 @@ const PieChartComponent: React.FC<PieChartProps> = ({ data, title, centerText })
         <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
       </div>
       <div className="flex-1 relative" style={{ minHeight: '250px' }}>
-        <Doughnut options={options} data={data} />
-        
-        {centerText && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-            <p className="text-sm text-gray-500">{centerText.title}</p>
-            <p className="text-2xl font-bold text-gray-800">{centerText.value}</p>
+        {isLoading ? (
+          <div className="animate-pulse h-full flex flex-col">
+            <div className="h-8 bg-gray-200 rounded w-1/3 mb-4"></div>
+            <div className="flex-1 bg-gray-200 rounded-full"></div>
           </div>
+        ) : (
+          <>
+            <Doughnut options={options} data={data} />
+            {centerText && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                <p className="text-xs text-gray-500">{centerText.title}</p>
+                <p className="text-2xl font-bold text-gray-800">{centerText.value}</p>
+              </div>
+            )}
+          </>
         )}
       </div>
     </GlassCard>
   );
 };
 
-export default PieChartComponent;
+export default PieChart;

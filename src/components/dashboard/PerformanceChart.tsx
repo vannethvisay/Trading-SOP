@@ -8,9 +8,10 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 interface PerformanceChartProps {
   data: any;
   title: string;
+  isLoading?: boolean;
 }
 
-const PerformanceChart: React.FC<PerformanceChartProps> = ({ data, title }) => {
+const PerformanceChart: React.FC<PerformanceChartProps> = ({ data, title, isLoading = false }) => {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
@@ -84,9 +85,29 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({ data, title }) => {
     <GlassCard className="h-full">
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
+        {!isLoading && (
+          <div className="flex space-x-2">
+            <button className="text-xs px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 transition-colors">
+              1D
+            </button>
+            <button className="text-xs px-2 py-1 rounded bg-indigo-100 text-indigo-700">
+              1W
+            </button>
+            <button className="text-xs px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 transition-colors">
+              1M
+            </button>
+          </div>
+        )}
       </div>
       <div className="flex-1" style={{ minHeight: '250px' }}>
-        <Line options={options} data={data} />
+        {isLoading ? (
+          <div className="animate-pulse h-full flex flex-col">
+            <div className="h-8 bg-gray-200 rounded w-1/3 mb-4"></div>
+            <div className="flex-1 bg-gray-200 rounded"></div>
+          </div>
+        ) : (
+          <Line options={options} data={data} />
+        )}
       </div>
     </GlassCard>
   );

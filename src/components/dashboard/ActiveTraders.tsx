@@ -1,79 +1,74 @@
 import React from 'react';
 import GlassCard from '../ui/GlassCard';
+import { Trader } from '../../types';
+import { ArrowUpRight, ArrowDownRight } from 'lucide-react';
 
-interface Trader {
-  id: number;
-  name: string;
-  status: string;
-  trading: string;
-  positions: number;
-  pnl: string;
-  pnlValue: number;
+interface ActiveTradersProps {
+  count?: number;
+  traders?: Trader[];
+  isLoading?: boolean;
 }
 
-const ActiveTraders: React.FC = () => {
-  const traders: Trader[] = [
-    {
-      id: 1,
-      name: 'John Smith',
-      status: 'active',
-      trading: 'EUR/USD, GBP/JPY',
-      positions: 3,
-      pnl: '+$1,250',
-      pnlValue: 1250
-    },
-    {
-      id: 2,
-      name: 'Sarah Johnson',
-      status: 'active',
-      trading: 'USD/JPY, AUD/USD',
-      positions: 2,
-      pnl: '+$850',
-      pnlValue: 850
-    }
-  ];
-
+const ActiveTraders: React.FC<ActiveTradersProps> = ({ 
+  count = 3,
+  traders = [],
+  isLoading = false
+}) => {
   return (
-    <GlassCard className="flex flex-col h-full">
-      <div className="flex justify-between items-center mb-3">
+    <GlassCard className="h-full">
+      <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold text-gray-800">Active Traders</h2>
-        <span className="status-badge active">2 Online</span>
+        <span className="text-sm font-medium bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">
+          {count} Online
+        </span>
       </div>
       
-      <div className="space-y-3 flex-1 overflow-y-auto">
-        {traders.map(trader => (
-          <div key={trader.id} className="p-2 bg-gray-50 rounded-lg">
-            <div className="flex justify-between items-center mb-1.5">
-              <div className="flex items-center">
-                <div className="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center mr-2">
-                  <span className="text-blue-600 font-medium text-xs">{trader.name.charAt(0)}</span>
-                </div>
-                <div>
-                  <p className="font-medium text-gray-800 text-sm">{trader.name}</p>
-                  <p className="text-xs text-gray-500">Trading: {trader.trading}</p>
-                </div>
+      {isLoading ? (
+        <div className="animate-pulse space-y-3">
+          {[1, 2, 3].map((_, index) => (
+            <div key={index} className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
+              <div className="flex-1">
+                <div className="w-24 h-4 bg-gray-200 rounded mb-1"></div>
+                <div className="w-16 h-3 bg-gray-200 rounded"></div>
               </div>
-              <span className="status-badge active text-xs">Active</span>
+              <div className="w-16 h-6 bg-gray-200 rounded"></div>
             </div>
-            
-            <div className="flex justify-between text-xs mt-2">
-              <div>
-                <p className="text-gray-500">Positions:</p>
-                <p className="font-medium text-gray-800">{trader.positions}</p>
+          ))}
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {traders.map((trader) => (
+            <div key={trader.id} className="flex items-center space-x-3">
+              <img 
+                src={trader.avatar} 
+                alt={trader.name} 
+                className="w-8 h-8 rounded-full object-cover border border-gray-200"
+              />
+              <div className="flex-1">
+                <p className="text-sm font-medium text-gray-800">{trader.name}</p>
+                <p className="text-xs text-gray-500">{trader.role}</p>
               </div>
-              <div>
-                <p className="text-gray-500">P&L:</p>
-                <p className={`font-medium ${trader.pnlValue >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
-                  {trader.pnl}
-                </p>
-              </div>
-              <div>
-                <button className="text-xs text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">View</button>
-              </div>
+              {typeof trader.performance === 'object' && (
+                <div className={`flex items-center text-sm font-medium ${
+                  trader.performance.monthlyProfit >= 0 ? 'text-green-600' : 'text-red-600'
+                }`}>
+                  {trader.performance.monthlyProfit >= 0 ? (
+                    <ArrowUpRight size={16} className="mr-1" />
+                  ) : (
+                    <ArrowDownRight size={16} className="mr-1" />
+                  )}
+                  ${Math.abs(trader.performance.monthlyProfit).toLocaleString()}
+                </div>
+              )}
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+          
+          <button className="w-full mt-2 text-center text-sm text-indigo-600 hover:text-indigo-800 transition-colors">
+            View All Traders
+          </button>
+        </div>
+      )}
     </GlassCard>
   );
 };
