@@ -210,6 +210,7 @@ export const traders = [
   {
     id: '1',
     name: 'John Smith',
+    email: 'john.smith@example.com',
     avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
     role: 'Senior Trader',
     performance: {
@@ -219,11 +220,16 @@ export const traders = [
       averageRR: 2.1
     },
     specialties: ['Forex', 'Commodities'],
-    status: 'active'
+    status: 'active',
+    profitSplit: {
+      trader: 70,
+      company: 30
+    }
   },
   {
     id: '2',
     name: 'Sarah Johnson',
+    email: 'sarah.johnson@example.com',
     avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
     role: 'Swing Trader',
     performance: {
@@ -233,11 +239,16 @@ export const traders = [
       averageRR: 2.4
     },
     specialties: ['Indices', 'Stocks'],
-    status: 'active'
+    status: 'active',
+    profitSplit: {
+      trader: 65,
+      company: 35
+    }
   },
   {
     id: '3',
     name: 'Michael Chen',
+    email: 'michael.chen@example.com',
     avatar: 'https://randomuser.me/api/portraits/men/67.jpg',
     role: 'Algorithmic Trader',
     performance: {
@@ -247,11 +258,16 @@ export const traders = [
       averageRR: 1.2
     },
     specialties: ['Crypto', 'Forex'],
-    status: 'on leave'
+    status: 'on leave',
+    profitSplit: {
+      trader: 60,
+      company: 40
+    }
   },
   {
     id: '4',
     name: 'Emma Davis',
+    email: 'emma.davis@example.com',
     avatar: 'https://randomuser.me/api/portraits/women/19.jpg',
     role: 'Day Trader',
     performance: {
@@ -261,11 +277,16 @@ export const traders = [
       averageRR: 1.5
     },
     specialties: ['Stocks', 'Options'],
-    status: 'active'
+    status: 'active',
+    profitSplit: {
+      trader: 75,
+      company: 25
+    }
   },
   {
     id: '5',
     name: 'David Wilson',
+    email: 'david.wilson@example.com',
     avatar: 'https://randomuser.me/api/portraits/men/91.jpg',
     role: 'Portfolio Manager',
     performance: {
@@ -275,7 +296,11 @@ export const traders = [
       averageRR: 2.8
     },
     specialties: ['Bonds', 'Indices'],
-    status: 'inactive'
+    status: 'inactive',
+    profitSplit: {
+      trader: 50,
+      company: 50
+    }
   }
 ];
 
@@ -291,7 +316,8 @@ export const trades = [
     date: '2023-07-28T09:30:00',
     status: 'closed',
     checklistCompleted: true,
-    trader: 'John Smith'
+    trader: 'John Smith',
+    traderId: '1'
   },
   {
     id: '2',
@@ -304,7 +330,8 @@ export const trades = [
     date: '2023-07-27T14:15:00',
     status: 'closed',
     checklistCompleted: true,
-    trader: 'Sarah Johnson'
+    trader: 'Sarah Johnson',
+    traderId: '2'
   },
   {
     id: '3',
@@ -317,7 +344,8 @@ export const trades = [
     date: '2023-07-26T11:45:00',
     status: 'closed',
     checklistCompleted: false,
-    trader: 'Michael Chen'
+    trader: 'Michael Chen',
+    traderId: '3'
   },
   {
     id: '4',
@@ -330,7 +358,8 @@ export const trades = [
     date: '2023-07-28T15:20:00',
     status: 'open',
     checklistCompleted: true,
-    trader: 'Emma Davis'
+    trader: 'Emma Davis',
+    traderId: '4'
   },
   {
     id: '5',
@@ -343,7 +372,8 @@ export const trades = [
     date: '2023-07-25T10:10:00',
     status: 'closed',
     checklistCompleted: true,
-    trader: 'David Wilson'
+    trader: 'David Wilson',
+    traderId: '5'
   },
   {
     id: '6',
@@ -356,7 +386,8 @@ export const trades = [
     date: '2023-07-28T13:40:00',
     status: 'open',
     checklistCompleted: true,
-    trader: 'John Smith'
+    trader: 'John Smith',
+    traderId: '1'
   },
   {
     id: '7',
@@ -369,7 +400,8 @@ export const trades = [
     date: '2023-07-24T09:05:00',
     status: 'closed',
     checklistCompleted: true,
-    trader: 'Sarah Johnson'
+    trader: 'Sarah Johnson',
+    traderId: '2'
   },
   {
     id: '8',
@@ -382,6 +414,7 @@ export const trades = [
     date: '2023-07-28T11:30:00',
     status: 'open',
     checklistCompleted: false,
-    trader: 'Michael Chen'
+    trader: 'Michael Chen',
+    traderId: '3'
   }
 ];

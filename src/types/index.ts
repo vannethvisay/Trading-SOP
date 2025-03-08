@@ -15,6 +15,10 @@ export interface Trader {
   avatar: string;
   role?: string;
   specialties?: string[];
+  profitSplit?: {
+    trader: number;
+    company: number;
+  };
 }
 
 export interface ChecklistItem {

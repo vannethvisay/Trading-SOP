@@ -2,7 +2,7 @@ import React from 'react';
 import { Trader } from '../../types';
 import GlassCard from '../ui/GlassCard';
 import Badge from '../ui/Badge';
-import { TrendingUp, TrendingDown, BarChart2 } from 'lucide-react';
+import { TrendingUp, TrendingDown, BarChart2, PieChart } from 'lucide-react';
 import GlassButton from '../ui/GlassButton';
 
 interface TraderCardProps {
@@ -29,6 +29,14 @@ const TraderCard: React.FC<TraderCardProps> = ({ trader }) => {
   const winRate = typeof trader.winRate === 'number' ? trader.winRate : (performance.winRate || 0);
   const trades = typeof trader.trades === 'number' ? trader.trades : (performance.totalTrades || 0);
   const profitLoss = typeof trader.profitLoss === 'number' ? trader.profitLoss : (performance.monthlyProfit || 0);
+  
+  // Get profit split values or default to 50/50
+  const traderSplit = trader.profitSplit?.trader || 50;
+  const companySplit = trader.profitSplit?.company || 50;
+  
+  // Calculate actual profit amounts based on split
+  const traderProfit = profitLoss > 0 ? (profitLoss * traderSplit / 100).toFixed(0) : '0';
+  const companyProfit = profitLoss > 0 ? (profitLoss * companySplit / 100).toFixed(0) : '0';
 
   return (
     <GlassCard className="h-full">
@@ -86,6 +94,37 @@ const TraderCard: React.FC<TraderCardProps> = ({ trader }) => {
             <p className={`mt-1 text-xl font-semibold ${profitLoss >= 0 ? 'text-green-600' : 'text-red-600'}`}>
               ${profitLoss.toLocaleString()}
             </p>
+          </div>
+        </div>
+        
+        {/* Profit Split Section */}
+        <div className="mt-4 bg-indigo-50/50 rounded-lg p-3">
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-sm font-medium text-gray-700">Profit Split</p>
+            <PieChart size={16} className="text-indigo-500" />
+          </div>
+          
+          <div className="flex items-center">
+            <div className="w-full bg-gray-200 rounded-full h-2.5">
+              <div 
+                className="bg-indigo-600 h-2.5 rounded-full" 
+                style={{ width: `${traderSplit}%` }}
+              ></div>
+            </div>
+            <div className="ml-2 text-xs font-medium text-gray-700 min-w-[80px] text-right">
+              {traderSplit}% / {companySplit}%
+            </div>
+          </div>
+          
+          <div className="mt-2 flex justify-between text-sm">
+            <div>
+              <span className="text-gray-500">Trader:</span>
+              <span className="ml-1 font-medium text-indigo-700">${traderProfit}</span>
+            </div>
+            <div>
+              <span className="text-gray-500">Company:</span>
+              <span className="ml-1 font-medium text-indigo-700">${companyProfit}</span>
+            </div>
           </div>
         </div>
         
