@@ -28,9 +28,23 @@ export interface ChecklistItem {
   category: 'pre-trade' | 'during-trade' | 'post-trade';
 }
 
+export interface TradingAccount {
+  id: string;
+  name: string;
+  accountNumber: string;
+  broker: string;
+  balance: number;
+  currency: string;
+  type: 'demo' | 'live' | 'prop';
+  status: 'active' | 'inactive' | 'suspended';
+  createdAt: string;
+  lastActivity?: string;
+}
+
 export interface Trade {
   id: string;
   traderId: string;
+  accountId?: string;
   pair: string;
   type: 'buy' | 'sell';
   entryPrice: number;

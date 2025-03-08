@@ -304,6 +304,57 @@ export const traders = [
   }
 ];
 
+export const tradingAccounts = [
+  {
+    id: 'acc1',
+    name: 'Main Forex Account',
+    accountNumber: 'FX78923456',
+    broker: 'IC Markets',
+    balance: 25000,
+    currency: 'USD',
+    type: 'live',
+    status: 'active',
+    createdAt: '2023-01-15T10:30:00',
+    lastActivity: '2023-07-28T15:45:00'
+  },
+  {
+    id: 'acc2',
+    name: 'Prop Firm Challenge',
+    accountNumber: 'PF12345678',
+    broker: 'FTMO',
+    balance: 100000,
+    currency: 'USD',
+    type: 'prop',
+    status: 'active',
+    createdAt: '2023-03-22T09:15:00',
+    lastActivity: '2023-07-27T11:20:00'
+  },
+  {
+    id: 'acc3',
+    name: 'Practice Account',
+    accountNumber: 'DM45678901',
+    broker: 'Oanda',
+    balance: 10000,
+    currency: 'USD',
+    type: 'demo',
+    status: 'active',
+    createdAt: '2023-02-10T14:45:00',
+    lastActivity: '2023-06-15T16:30:00'
+  },
+  {
+    id: 'acc4',
+    name: 'Crypto Trading',
+    accountNumber: 'CT98765432',
+    broker: 'Binance',
+    balance: 15000,
+    currency: 'USD',
+    type: 'live',
+    status: 'inactive',
+    createdAt: '2022-11-05T08:20:00',
+    lastActivity: '2023-05-20T10:15:00'
+  }
+];
+
 export const trades = [
   {
     id: '1',
@@ -317,7 +368,8 @@ export const trades = [
     status: 'closed',
     checklistCompleted: true,
     trader: 'John Smith',
-    traderId: '1'
+    traderId: '1',
+    accountId: 'acc1'
   },
   {
     id: '2',
@@ -331,7 +383,8 @@ export const trades = [
     status: 'closed',
     checklistCompleted: true,
     trader: 'Sarah Johnson',
-    traderId: '2'
+    traderId: '2',
+    accountId: 'acc2'
   },
   {
     id: '3',
@@ -345,7 +398,8 @@ export const trades = [
     status: 'closed',
     checklistCompleted: false,
     trader: 'Michael Chen',
-    traderId: '3'
+    traderId: '3',
+    accountId: 'acc3'
   },
   {
     id: '4',
@@ -359,7 +413,8 @@ export const trades = [
     status: 'open',
     checklistCompleted: true,
     trader: 'Emma Davis',
-    traderId: '4'
+    traderId: '4',
+    accountId: 'acc1'
   },
   {
     id: '5',
@@ -373,7 +428,8 @@ export const trades = [
     status: 'closed',
     checklistCompleted: true,
     trader: 'David Wilson',
-    traderId: '5'
+    traderId: '5',
+    accountId: 'acc2'
   },
   {
     id: '6',
@@ -387,7 +443,8 @@ export const trades = [
     status: 'open',
     checklistCompleted: true,
     trader: 'John Smith',
-    traderId: '1'
+    traderId: '1',
+    accountId: 'acc1'
   },
   {
     id: '7',
@@ -401,7 +458,8 @@ export const trades = [
     status: 'closed',
     checklistCompleted: true,
     trader: 'Sarah Johnson',
-    traderId: '2'
+    traderId: '2',
+    accountId: 'acc2'
   },
   {
     id: '8',
@@ -415,6 +473,7 @@ export const trades = [
     status: 'open',
     checklistCompleted: false,
     trader: 'Michael Chen',
-    traderId: '3'
+    traderId: '3',
+    accountId: 'acc3'
   }
 ];

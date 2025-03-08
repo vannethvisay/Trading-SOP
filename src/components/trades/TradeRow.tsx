@@ -6,9 +6,10 @@ import { ArrowUpRight, ArrowDownRight, ExternalLink } from 'lucide-react';
 
 interface TradeRowProps {
   trade: Trade;
+  accountName?: string;
 }
 
-const TradeRow: React.FC<TradeRowProps> = ({ trade }) => {
+const TradeRow: React.FC<TradeRowProps> = ({ trade, accountName }) => {
   return (
     <tr className="bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all duration-200">
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -25,6 +26,9 @@ const TradeRow: React.FC<TradeRowProps> = ({ trade }) => {
             {trade.type.toUpperCase()}
           </span>
         </div>
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        {accountName || '-'}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
         {trade.entryPrice}
